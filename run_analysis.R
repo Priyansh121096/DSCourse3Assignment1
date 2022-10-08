@@ -69,11 +69,11 @@ main <- function() {
 
     ## Merge the two data sets to create the data set required in step#4.
     data <- rbind(test_data, train_data)
-    write.csv(data, "data1.csv")
+    write.csv(data, "final_data.csv")
 
     ## Step 5
     data2 <- aggregate(. ~ subject + activity, data = data, FUN = mean)
-    write.csv(data2, "data.csv")
+    write.csv(data2, "final_data_aggregated.csv")
 
     data2
 }
