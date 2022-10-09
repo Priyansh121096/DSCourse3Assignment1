@@ -13,20 +13,12 @@ main <- function() {
     ## Root data directory
     root <- "UCI HAR Dataset"
 
-    ## Get the variable (column) names.
-    path <- file.path(root, "features.txt")
-    feature_names <- read.table(path)
-    feature_names <- feature_names$V2
-
     ## Get activity labels
     path <- file.path(root, "activity_labels.txt")
     activity_names <- read.table(path)
     activity_names <- activity_names$V2
 
-    ## Function to prepare the test/train data sets. It does the following:
-    ## 1. Enriches the data sets with activity names.
-    ## 2. Labels the data sets with feature names.
-    ## 3. Extracts only the measurements on the mean and standard deviation for each measurement.
+    ## Function to get the test/train data set enriched with subject ids and activity labels.
     prepare_dataset <- function(name) {
         assert_that(name %in% c("test", "train"))
 
@@ -50,32 +42,45 @@ main <- function() {
         path <- file.path(subroot, filename)
         data <- read.table(path)
 
-        # Label the data set with feature names.
-        colnames(data) <- feature_names
-
         # Enrich the data set with activity names and subject ids.
         data <- cbind(activity = activity_names, subject = subject_ids, data)
-
-        # Extract only the measurements on the mean and standard deviation for each measurement.
-        data <- select(data, activity, subject, matches("^.*(mean|std)\\(\\).*$"))
 
         data
     }
 
     ## Get the test and the training data sets.
     test_data <- prepare_dataset("test")
-
     train_data <- prepare_dataset("train")
 
-    ## Merge the two data sets to create the data set required in step#4.
+    ## Merge the two data sets and give human readable column names
+    ## to create the data set required in step#4.
     data <- rbind(test_data, train_data)
+
+    # Get the variable (column) names.
+    path <- file.path(root, "features.txt")
+    feature_names <- read.table(path)
+    feature_names <- feature_names$V2
+    names(data)[-(1:2)] <- feature_names
+
+    # Extract only the measurements on the mean and standard deviation for each measurement.
+    data <- select(data, activity, subject, matches("^.*(mean|std)\\(\\).*$"))
+
+    # Transform feature names into human readable names.
+    cleanup_col_name <- function(name) {
+        name <- gsub("mean\\(\\)", "Mean", name)
+        name <- gsub("std\\(\\)", "STD", name)
+        name <- gsub("-", "", name)
+    }
+    data <- rename_with(data, cleanup_col_name)
+
+    # Write this data to a CSV.
     write.csv(data, "final_data.csv")
 
-    ## Step 5
-    data2 <- aggregate(. ~ subject + activity, data = data, FUN = mean)
-    write.csv(data2, "final_data_aggregated.csv")
+    ## Step 5 - create a data set with the average of each variable for each activity and each subject.
+    data <- aggregate(. ~ subject + activity, data = data, FUN = mean)
+    write.csv(data, "final_data_aggregated.csv")
 
-    data2
+    data
 }
 
 main()
