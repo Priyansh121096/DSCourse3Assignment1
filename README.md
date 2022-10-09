@@ -1,3 +1,5 @@
+# Getting and Cleaning Data Course Project
+
 This repo is meant to contain the code for the programming assignment of the [Getting and Cleaning Data course](https://www.coursera.org/learn/data-cleaning) provided by John Hopkins University as a part of their [Data Science Specialization on Coursera](https://www.coursera.org/specializations/jhu-data-science).
 
 ## Objective
