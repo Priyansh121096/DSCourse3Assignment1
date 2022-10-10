@@ -2,3 +2,5 @@
 /Course3Ass1.code-workspace
 /Course3Ass1.Rproj
 .vscode/launch.json
+.RData
+.Rhistory

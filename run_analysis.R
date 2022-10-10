@@ -6,6 +6,7 @@
 ## 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 ## Imports
+library(data.table)
 library(dplyr)
 library(assertthat)
 
@@ -73,12 +74,9 @@ main <- function() {
     }
     data <- rename_with(data, cleanup_col_name)
 
-    # Write this data to a CSV.
-    write.csv(data, "final_data.csv")
-
     ## Step 5 - create a data set with the average of each variable for each activity and each subject.
-    data <- aggregate(. ~ subject + activity, data = data, FUN = mean)
-    write.csv(data, "final_data_aggregated.csv")
+    data <- data %>% group_by(activity, subject) %>% summarise(across(everything(), mean), .groups = 'keep')
+    write.table(data, "final_data_aggregated.txt", row.names = FALSE)
 
     data
 }
