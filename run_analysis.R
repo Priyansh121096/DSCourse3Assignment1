@@ -68,6 +68,11 @@ main <- function() {
 
     # Transform feature names into human readable names.
     cleanup_col_name <- function(name) {
+        name <- gsub("^t", "Time", name)
+        name <- gsub("^f", "Frequency", name)
+        name <- gsub("Acc", "Accelerometer", name)
+        name <- gsub("Gyro", "Gyroscope", name)
+        name <- gsub("Mag", "Magnitude", name)
         name <- gsub("mean\\(\\)", "Mean", name)
         name <- gsub("std\\(\\)", "STD", name)
         name <- gsub("-", "", name)
