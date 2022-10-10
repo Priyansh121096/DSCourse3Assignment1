@@ -1,6 +1,6 @@
 # Getting and Cleaning Data Course Project
 
-This repo is meant to contain the code for the programming assignment of the [Getting and Cleaning Data course](https://www.coursera.org/learn/data-cleaning) provided by John Hopkins University as a part of their [Data Science Specialization on Coursera](https://www.coursera.org/specializations/jhu-data-science).
+This repo is meant to contain the code for the programming assignment of the [Getting and Cleaning Data course](https://www.coursera.org/learn/data-cleaning) provided by John Hopkins University as a part of their [Data Science Specialization on Coursera](https://www.coursera.org/specializations/jhu-data-science). I have used R@4.2.1.
 
 ## Objective
 To create a tidy data set out of the data collected from accelerometers from the Samsung Galaxy S smartphone provided by http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones.
