@@ -6,7 +6,7 @@ This repo is meant to contain the code for the programming assignment of the [Ge
 To create a tidy data set out of the data collected from accelerometers from the Samsung Galaxy S smartphone provided by http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones.
 
 ## Workflow
-- The raw data provided to us is present in [UCI HAR Dataset](https://github.com/Priyansh121096/DSCourse3Assignment1/tree/main/UCI%20HAR%20Dataset) directory. Details about the raw data set can be read from [UCI HAR Dataset/README.txt](UCI HAR Dataset/README.txt).
+- The raw data provided to us is present in [UCI HAR Dataset](https://github.com/Priyansh121096/DSCourse3Assignment1/tree/main/UCI%20HAR%20Dataset) directory. Details about the raw data set can be read from [UCI HAR Dataset/README.txt](https://github.com/Priyansh121096/DSCourse3Assignment1/tree/main/UCI%20HAR%20Dataset/README.txt).
 - The script [run_analysis.R](run_analysis.R) performs the following transformations on the raw data and generates a tidy data set [final_data_aggregated.txt](final_data_aggregated.txt) whose data is described in [CodeBook.md](CodeBook.md):
   1. First activity labels (activity_id -> activity_name) are read from `UCI HAR Dataset/activity_labels.txt`.
   2. Then, test and training data are fetched from `UCI HAR Dataset/<test/train>/X_<test/train>.txt` respectively.
